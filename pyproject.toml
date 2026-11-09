@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-driven-bms"
+version = "0.1.0"
+description = "AI-driven BMS research project on CALCE SP20-1 data: SOC estimation, SOH/RUL/fault feasibility"
+requires-python = ">=3.10"
+dependencies = ["numpy", "pandas", "scipy", "matplotlib", "seaborn", "scikit-learn", "joblib", "PyYAML", "openpyxl"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

@@ -1,0 +1,54 @@
+# Dataset configuration for the four CALCE files (cell SP20-1).
+# Nothing here is guessed: every value was checked in docs/DATASET_AUDIT_REPORT.md.
+# `nominal_temperature_c` comes from the FILE NAME / sheet name and is NOT a measured temperature,
+# except where `temperature_column` is given (a single reading in the 25 C file).
+raw_dir: data/raw/CALCE
+processed_dir: data/processed
+cell:
+  cell_id: SP20-1
+  # Nominal capacity has NOT been verified from CALCE documentation (no network access during the audit).
+  # Therefore SOH(%) = Q/Q_nominal must not be computed. Set a value + verified: true only after checking.
+  nominal_capacity_ah: null
+  nominal_capacity_verified: false
+standard_columns: [time_s, voltage_v, current_a, step, cycle, temperature_c]
+sign_convention: "charge current > 0, discharge current < 0 (verified identical in all four files)"
+datasets:
+  - id: T00C_lowI
+    file: 02_24_2016_SP20-1_0C_lowcurrentOCV.xls   # actually an OOXML (zip) workbook with a legacy extension
+    test_type: low_current_ocv
+    nominal_temperature_c: 0
+    temperature_source: file_name
+    sheets: [Channel_1-005_1, Channel_1-005_2]     # continuation of the same test, Data_Point continuous
+    dedup_on: Data_Point
+    columns: {time_s: Test_Time(s), voltage_v: Voltage(V), current_a: Current(A), step: Step_Index, cycle: Cycle_Index}
+    scale: {voltage_v: 1.0, current_a: 1.0}
+  - id: T25C_lowI
+    file: 11_5_2015_low_current_OCV_test_SP20-1.xlsx
+    test_type: low_current_ocv
+    nominal_temperature_c: 25
+    temperature_source: file_name_plus_single_reading_23C
+    sheets: [SP20-OCVSOC-0.05C]
+    columns: {time_s: "Duration (sec)", voltage_v: mV, current_a: mA, step: "Pgm step", temperature_c: Temperature}
+    scale: {voltage_v: 0.001, current_a: 0.001}
+  - id: T45C_lowI
+    file: 11_21_2015_low_current_OCV_test_SP20-1.xlsx
+    test_type: low_current_ocv
+    nominal_temperature_c: 45
+    temperature_source: file_name
+    sheets: [11_21_2015_45C_SP20-1_samallcur]
+    columns: {time_s: "Duration (sec)", voltage_v: mV, current_a: mA}
+    scale: {voltage_v: 0.001, current_a: 0.001}
+  - id: INIT_1A
+    file: 10_16_2015_Initial_capacity_SP20-1.xlsx
+    test_type: initial_capacity
+    nominal_temperature_c: null                    # not documented anywhere in the file
+    temperature_source: unknown
+    sheets: [Sheet1]
+    columns: {time_s: Test_Time(s), voltage_v: Voltage(V), current_a: Current(A), step: Step_Index, cycle: Cycle_Index}
+    scale: {voltage_v: 1.0, current_a: 1.0}
+segmentation:
+  rest_current_threshold_a: 0.02      # |I| below this = rest (0.1 A tests: 20 % of the test current)
+  min_segment_duration_s: 600
+validity:
+  voltage_range_v: [2.0, 4.5]
+  current_abs_max_a: 5.0

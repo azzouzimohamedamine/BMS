@@ -1,0 +1,34 @@
+\section{Results}
+\subsection{Physics-based estimators}
+Table~\ref{tab:socphys} and Fig.~\ref{fig:traj} show that the EKF stays below 1.1 points MAE on all three unseen conditions, including the 1\,A test, and removes a 30-point initial error within the excluded 10\,min warm-up, whereas Coulomb counting drifts linearly because $Q_{\mathrm{cal}}$ differs from the capacity actually delivered (3.2--6.4 points) and keeps a wrong initial SOC. Identifying parameters on the same test lowers the EKF MAE to about 0.12 points (in-sample, optimistic; see \texttt{docs/EXPERIMENTAL\_RESULTS.md}).
+\input{tables/tab_soc_physics}
+\begin{figure}[H]\centering\includegraphics[width=\linewidth]{fig03_physics_soc_trajectories.png}\caption{SOC trajectories and errors of CC and EKF (parameters from 25\,°C) with correct and wrong (70\,\%) initial SOC.}\label{fig:traj}\end{figure}
+
+\subsection{Data-driven estimators and comparative analysis}
+Table~\ref{tab:socdd} and Fig.~\ref{fig:dd} give the cross-condition errors. Random Forest and gradient boosting reach 0.4--1.6 points on the 0.1\,A cross-temperature cases and fail on the 1\,A test (13--14 points), because the current lies far outside the training range and the voltage sag is read as lower SOC. The NumPy LSTM/GRU are less accurate and more variable (GRU in particular); their hyper-parameters were not optimised, so no general conclusion on recurrent models is drawn.
+\input{tables/tab_soc_datadriven}
+\begin{figure}[H]\centering\includegraphics[width=0.85\linewidth]{fig05_data_driven_protocols.png}\caption{MAE of data-driven models per protocol (log scale).}\label{fig:dd}\end{figure}
+
+\subsection{Temperature influence}
+Measured delivered capacity at 0.1\,A is 1.882\,Ah at 0\,°C (87\,\% of the 25\,°C value) and $R_0$ at discharge onset is 0.132\,$\Omega$ versus 0.080\,$\Omega$ at 25\,°C (Fig.~\ref{fig:cap}). The EKF and CC, which carry a fixed calibrated capacity, show the corresponding error (CC 6.4 points at 0\,°C). In contrast, data-driven models score well across temperature, but this is largely because each test's reference is normalised by its own capacity, so the capacity change is invisible to the target; the result must not be read as robustness to real capacity variation. Voltage versus reference SOC is nearly temperature-independent at 0.1\,A (Fig.~\ref{fig:vsoc}).
+\begin{figure}[H]\centering\includegraphics[width=\linewidth]{fig07_capacity_and_r0.png}\caption{Delivered capacity and $R_0$ per condition (labels, not measured temperatures).}\label{fig:cap}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=0.6\linewidth]{fig02_voltage_vs_soc_ref.png}\caption{Voltage versus calculated reference SOC.}\label{fig:vsoc}\end{figure}
+
+\subsection{Noise robustness and computational cost}
+Table~\ref{tab:noise} (Fig.~\ref{fig:noise}): the EKF is insensitive to noise at its fixed covariance (0.9 points mean MAE), but a 20\,mA current bias raises Coulomb counting to 14 points. Trees degrade gently; the original LSTM/GRU collapse (tens of points) because standardising a nearly constant current (standard deviation of only 0.1--1.6\,mA on the 20\,s grid in the three low-current tests) amplifies noise, which the \texttt{*\_sf} variants remove. Inference costs are in Table~\ref{tab:timing}; all are far below real-time limits at 20\,s sampling.
+\input{tables/tab_noise}
+\begin{figure}[H]\centering\includegraphics[width=0.75\linewidth]{fig06_noise_robustness.png}\caption{Noise robustness (simulated perturbations).}\label{fig:noise}\end{figure}
+\input{tables/tab_timing}
+
+\subsection{SOH and RUL}
+SOH(\%) is not computed: nominal capacity is unverified and one cycle per file gives no degradation trajectory. RUL is not defined for the same reasons (\texttt{results/experiment\_logs/soh\_rul\_feasibility.json}). The delivered-capacity ratios of Table~\ref{tab:capacity} mix temperature, rate and history and are not SOH.
+
+\subsection{Fault diagnosis}
+On real data the detectors flag few windows (Table~\ref{tab:faultreal}); of the 80 top-ranked windows (20 per dataset), 50 lie within two minutes of a protocol step transition and are labelled as probable operational events by the decision layer; the remaining 30 are unexplained statistical anomalies. None constitutes evidence of a real fault. The persistence rule fires on constant-voltage charge phases, which are expected. On \emph{simulated} faults (Tables~\ref{tab:faultsim10}, \ref{tab:faultsim05}) the combined detector finds every event at magnitude $\times$1 and $\times$0.5, with different detectors responsible for different fault types; at magnitude $\times$0.25 the extra-resistance fault is missed. Window precision of the combined detector is low (0.24--0.55 at $\times$1), because detectors also flag genuine transitions.
+\input{tables/tab_fault_real}
+\input{tables/tab_fault_sim_10}
+\input{tables/tab_fault_sim_05}
+\begin{figure}[H]\centering\includegraphics[width=\linewidth]{fig08_fault_simulation_detection.png}\caption{Event detection on \emph{simulated} faults.}\end{figure}
+
+\subsection{Discussion}
+The EKF is the most reliable estimator across temperature and rate in this study because its physical structure handles the voltage drop and corrects initial errors; tree models are accurate only inside the training regime; recurrent networks need more data and tuning. All conclusions hold for one cell and constant-current tests.

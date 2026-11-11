@@ -1,0 +1,25 @@
+\section{Methodology}
+\subsection{SOC reference}
+Because SOC is not measured, the reference over the main discharge is calculated as
+\begin{equation}
+\mathrm{SOC}_{\mathrm{ref}}(t)=1-\frac{1}{Q_{\mathrm{dis}}}\int_{t_0}^{t}|I(\tau)|\,\mathrm{d}\tau,\qquad Q_{\mathrm{dis}}=\int_{t_0}^{t_{\mathrm{cut}}}|I|\,\mathrm{d}\tau ,
+\end{equation}
+with 100\,\% at the start of the discharge and 0\,\% at the 2.5\,V cut-off of that test. It is a calculated, test-normalised quantity affected by current-sensor error; it is never presented as a measured ground truth.
+
+\subsection{SOC estimators}
+\paragraph{Coulomb counting.} $\mathrm{SOC}(t)=\mathrm{SOC}_0+\frac{1}{Q_{\mathrm{cal}}}\int I\,\mathrm{d}t$, with $Q_{\mathrm{cal}}=2.157$\,Ah, the delivered capacity of the 25\,°C test. Using each test's own capacity would be circular.
+\paragraph{EKF.} A first-order Th\'evenin model, with $i_d>0$ for discharge,
+\begin{equation}
+V=\mathrm{OCV}(z)-R_0 i_d - V_1,\qquad \dot V_1=-\frac{V_1}{R_1C_1}+\frac{i_d}{C_1},\qquad \dot z=-\frac{i_d}{3600\,Q_{\mathrm{cal}}}
+\end{equation}
+is discretised and filtered with the EKF state $x=[z,V_1]^\top$ (prediction with $F=\mathrm{diag}(1,e^{-\Delta t/\tau})$, update with $H=[\partial\mathrm{OCV}/\partial z,\,-1]$) \cite{plett2004ekf3}. $R_0$ comes from the rest-to-discharge voltage step, $R_1,\tau$ from a fit of the first 20\,min of discharge, and a pseudo-OCV from the 0.1\,A discharge voltage corrected by $i_d(R_0+R_1)$ \cite{weng2014}. Parameters are constants identified at 25\,°C ($R_0=0.080\,\Omega$, $R_1=0.028\,\Omega$, $\tau=141$\,s).
+\paragraph{Data-driven models.} Random Forest \cite{breiman2001} and scikit-learn histogram gradient boosting (not XGBoost \cite{chen2016xgb}, unavailable offline) use the four features; LSTM \cite{hochreiter1997} and GRU \cite{cho2014} (16 units) use 30-step windows of $(V,I)$, are implemented in NumPy with manual back-propagation through time and Adam \cite{kingma2015}, and are validated by finite-difference gradient checks. Scalers are fitted on training data only.
+
+\subsection{SOH and RUL}
+SOH uses the definition above only with a verified $Q_{\mathrm{nom}}$. RUL is $\mathrm{RUL}=N_{\mathrm{EOL}}-N$, with $N_{\mathrm{EOL}}$ the first cycle where capacity falls below a threshold fraction of $Q_{\mathrm{nom}}$ (e.g.\ 80\,\%). Both pipelines demand a multi-cycle trajectory, a verified nominal capacity and (RUL) an observed EOL crossing, and otherwise raise \texttt{InsufficientDataError}. Chronological splits are provided for when such data exist.
+
+\subsection{Fault diagnosis}
+Window features (60\,s windows, 30\,s hop) are: voltage std., max.\ voltage rate, current std., current deviation from its local set-point, max.\ current step and max.\ sampling gap. A robust $z$-score threshold detector \cite{pedregosa2011}, Isolation Forest \cite{liu2008if} and One-Class SVM \cite{scholkopf2001} are fitted on 0\,°C and 45\,°C windows with thresholds at the 99.5th percentile of training scores; a persistence rule detects a frozen voltage channel. Detections on real data are \emph{statistical anomalies}. A simulator injects five synthetic fault types into the real 25\,°C signal for benchmarking only. A decision layer reports measurement, severity, agreement-based confidence, interpretation, recommended investigation and provenance. Autoencoders and supervised classifiers were not implemented (no labels; data volume not justifying them).
+
+\subsection{Metrics}
+$\mathrm{MAE}$, $\mathrm{RMSE}$, $R^2$, maximum absolute error, bias and inference time per 1000 samples; SOC errors are in percentage points.

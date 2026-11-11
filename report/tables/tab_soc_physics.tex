@@ -1,0 +1,25 @@
+\begin{table}[htbp]\centering\footnotesize
+\begin{tabular}{llrrrr}
+\toprule
+ &  & MAE & RMSE & R$^2$ & MaxAE \\
+Test & Estimator &  &  &  &  \\
+\midrule
+\multirow[t]{4}{*}{0\,°C} & CC (SOC$_0$=100\%) & 6.44 & 7.40 & 0.93 & 12.76 \\
+ & EKF (SOC$_0$=100\%) & 0.71 & 0.86 & 1.00 & 2.74 \\
+ & CC (SOC$_0$=70\%) & 23.56 & 23.85 & 0.31 & 29.89 \\
+ & EKF (SOC$_0$=70\%) & 0.71 & 0.86 & 1.00 & 2.74 \\
+\cline{1-6}
+\multirow[t]{4}{*}{45\,°C} & CC (SOC$_0$=100\%) & 3.15 & 3.62 & 0.98 & 6.24 \\
+ & EKF (SOC$_0$=100\%) & 1.02 & 1.13 & 1.00 & 2.22 \\
+ & CC (SOC$_0$=70\%) & 26.85 & 26.91 & 0.12 & 29.94 \\
+ & EKF (SOC$_0$=70\%) & 1.03 & 1.14 & 1.00 & 2.22 \\
+\cline{1-6}
+\multirow[t]{4}{*}{1\,A} & CC (SOC$_0$=100\%) & 3.69 & 4.12 & 0.98 & 6.84 \\
+ & EKF (SOC$_0$=100\%) & 0.66 & 0.75 & 1.00 & 1.40 \\
+ & CC (SOC$_0$=70\%) & 26.31 & 26.37 & 0.02 & 29.45 \\
+ & EKF (SOC$_0$=70\%) & 0.69 & 0.77 & 1.00 & 1.38 \\
+\cline{1-6}
+\bottomrule
+\end{tabular}
+\caption{Physics-based SOC estimators (capacity and ECM calibrated on the 25\,°C test) on unseen conditions; errors in SOC points, first 10\,min excluded.}\label{tab:socphys}
+\end{table}

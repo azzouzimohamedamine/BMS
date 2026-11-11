@@ -1,0 +1,17 @@
+\begin{table}[htbp]\centering\footnotesize
+\begin{tabular}{lrrrrr}
+\toprule
+ & clean & low & medium & high & I bias 20\,mA \\
+\midrule
+coulomb & 4.79 & 4.78 & 4.77 & 4.75 & 13.95 \\
+ekf & 0.87 & 0.86 & 0.86 & 0.85 & 1.19 \\
+random\_forest & 1.00 & 1.01 & 1.05 & 1.16 & 1.00 \\
+hist\_gradient\_boosting & 0.99 & 1.05 & 1.20 & 1.66 & 0.98 \\
+gru & 6.03 & 60.64 & 70.63 & 70.64 & 25.35 \\
+gru\_sf & 5.87 & 5.91 & 6.26 & 7.43 & 8.48 \\
+lstm & 4.47 & 18.99 & 22.34 & 28.15 & 24.89 \\
+lstm\_sf & 2.22 & 2.27 & 2.41 & 2.89 & 3.43 \\
+\bottomrule
+\end{tabular}
+\caption{Noise robustness with \emph{simulated} perturbations (Table~\ref{tab:noisedef}) added to the real test signals: mean MAE (SOC points) over the 0\,°C and 45\,°C tests, models fitted on 25\,°C.}\label{tab:noise}
+\end{table}

@@ -1,0 +1,28 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor,textcomp,amsmath,amssymb,booktabs,multirow,graphicx,float,hyperref,geometry,array,caption}
+\geometry{margin=2.5cm}\emergencystretch=3em
+\graphicspath{{figures/}}
+\hypersetup{colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black}
+\title{AI-Driven Battery Management System for Electric Vehicles:\\ Multi-Stage SOC/SOH Estimation, Fault Diagnosis and Remaining Useful Life Prediction\\[4pt]\large A feasibility-bounded study on CALCE SP20-1 data}
+\author{AI-Driven BMS project}
+\date{Results generated from the repository state at the time of writing}
+\begin{document}
+\maketitle
+\begin{abstract}
+We build a software Battery Management System (BMS) around four experimental files of a single lithium-ion cell (CALCE SP20-1): three 0.1\,A charge/discharge tests labelled 0, 25 and 45\,°C and one 1\,A initial-capacity test. A data audit shows that each file contains one cycle only, that nominal capacity is undocumented, that no temperature channel exists, and that no SOC is measured. Consequently the study is bounded: State-of-Charge (SOC) estimation is evaluated in depth, whereas State-of-Health (SOH) and Remaining-Useful-Life (RUL) estimation are implemented as guarded pipelines that refuse to output values without ageing data, and fault diagnosis is limited to statistical anomalies plus a clearly labelled simulation benchmark. The SOC reference is \emph{calculated} by coulomb integration. Coulomb counting, an Extended Kalman Filter (EKF) on a first-order equivalent-circuit model, Random Forest, gradient boosting, and NumPy LSTM/GRU networks are compared in cross-temperature and cross-rate protocols. With capacity and circuit parameters calibrated at 25\,°C, the EKF achieves a mean absolute error (MAE) of 0.66--1.02 SOC points on the unseen 0\,°C, 45\,°C and 1\,A conditions and recovers from a 30-point initial error, whereas Coulomb counting shows 3.2--6.4 points and does not recover. Tree models are competitive at 0.1\,A (0.4--1.6 points) but fail at 1\,A (13--14 points). We discuss why the per-test normalisation of the reference flatters data-driven models and list all limitations.
+\end{abstract}
+\tableofcontents
+\input{chapters/01_intro}
+\input{chapters/02_background}
+\input{chapters/03_data}
+\input{chapters/04_methods}
+\input{chapters/05_experiments}
+\input{chapters/06_results}
+\input{chapters/07_conclusion}
+\bibliographystyle{unsrt}
+\bibliography{references}
+\appendix
+\input{chapters/08_appendix}
+\end{document}

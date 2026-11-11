@@ -1,0 +1,17 @@
+\begin{table}[htbp]\centering\footnotesize
+\begin{tabular}{lrrrrrr}
+\toprule
+ & random\_forest & hist\_gradient\_boosting & gru & gru\_sf & lstm & lstm\_sf \\
+Train $\rightarrow$ Test &  &  &  &  &  &  \\
+\midrule
+0\,°C+25\,°C $\rightarrow$ 45\,°C & 1.53 & 1.55 & 9.84 & 6.85 & 1.78 & 1.67 \\
+0\,°C+25\,°C+45\,°C $\rightarrow$ 1\,A & 13.20 & 12.96 & 53.46 & 37.63 & 53.01 & 24.37 \\
+0\,°C+45\,°C $\rightarrow$ 25\,°C & 1.41 & 1.53 & 11.33 & 9.47 & 1.24 & 1.06 \\
+25\,°C $\rightarrow$ 0\,°C & 0.43 & 0.42 & 5.88 & 6.36 & 4.97 & 2.39 \\
+25\,°C $\rightarrow$ 1\,A & 13.06 & 14.40 & 29.01 & 101.99 & 42.95 & 41.12 \\
+25\,°C $\rightarrow$ 45\,°C & 1.57 & 1.56 & 6.19 & 5.37 & 3.97 & 2.05 \\
+25\,°C+45\,°C $\rightarrow$ 0\,°C & 0.75 & 0.69 & 7.06 & 7.51 & 0.92 & 1.04 \\
+\bottomrule
+\end{tabular}
+\caption{Data-driven SOC models: MAE (SOC points) on the unseen test condition (clean signals). \texttt{*\_sf}: std-floor scaling variant added post hoc.}\label{tab:socdd}
+\end{table}

@@ -1,0 +1,12 @@
+\section{Introduction}
+\subsection{Research motivation}
+Electric-vehicle battery packs must be operated inside a safe window while delivering maximum range and life. A BMS therefore estimates internal states that cannot be measured directly (SOC, SOH, RUL) and supervises faults \cite{waag2014}. Model-based filters \cite{plett2004ekf1,plett2004ekf2,plett2004ekf3} and data-driven methods \cite{chemali2018,ng2020} compete and complement each other, and their relative merit depends strongly on the data available.
+
+\subsection{Problem statement}
+Given four experimental files from one cell, which BMS functions can be developed and validated in a scientifically defensible way, and how do classical and learning-based estimators compare on them? A central part of the problem is to determine --- before modelling --- what the data can \emph{not} support.
+
+\subsection{Research objectives}
+(i) Audit the data and fix a valid SOC reference; (ii) compare Coulomb counting, EKF, Random Forest, gradient boosting, LSTM and GRU for SOC, including temperature, rate and noise effects; (iii) implement SOH, RUL and fault-diagnosis modules with explicit feasibility guards; (iv) integrate everything into a BMS engine and dashboard that separates measured, calculated, estimated and simulated quantities; (v) document all limitations.
+
+\subsection{Contributions and scope statement}
+The contributions are the audited and reproducible pipeline, the cross-condition SOC benchmark, a gradient-checked NumPy LSTM/GRU, and an explicit demonstration of module infeasibility where data are insufficient. We do \emph{not} claim lifetime prediction, cross-cell generalisation, validation under dynamic drive cycles, or detection of real faults.

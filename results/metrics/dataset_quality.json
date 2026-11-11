@@ -1,0 +1,118 @@
+{
+  "T00C_lowI": {
+    "n_rows": 83560,
+    "duration_h": 43.67065346755742,
+    "missing_per_column": {
+      "time_s": 0,
+      "voltage_v": 0,
+      "current_a": 0,
+      "step": 0,
+      "cycle": 0,
+      "temperature_c": 83560
+    },
+    "duplicated_timestamps": 0,
+    "non_monotonic_time": 0,
+    "dt_median_s": 1.0155194343642506,
+    "dt_max_s": 10.022736862185411,
+    "n_gaps_gt_5s": 8086,
+    "voltage_out_of_range": 0,
+    "current_out_of_range": 0,
+    "voltage_min_max": [
+      2.4999029636383057,
+      4.265552043914795
+    ],
+    "current_min_max": [
+      -0.1004140004515647,
+      0.9993641972541808
+    ],
+    "cycle_index_unique": [
+      1
+    ]
+  },
+  "T25C_lowI": {
+    "n_rows": 169412,
+    "duration_h": 47.06583333333333,
+    "missing_per_column": {
+      "time_s": 0,
+      "voltage_v": 0,
+      "current_a": 0,
+      "step": 0,
+      "cycle": 169412,
+      "temperature_c": 169411
+    },
+    "duplicated_timestamps": 5,
+    "non_monotonic_time": 0,
+    "dt_median_s": 1.0,
+    "dt_max_s": 7.0,
+    "n_gaps_gt_5s": 1,
+    "voltage_out_of_range": 0,
+    "current_out_of_range": 0,
+    "voltage_min_max": [
+      2.496,
+      4.205
+    ],
+    "current_min_max": [
+      -0.107,
+      0.135
+    ],
+    "cycle_index_unique": []
+  },
+  "T45C_lowI": {
+    "n_rows": 165387,
+    "duration_h": 45.94083333333333,
+    "missing_per_column": {
+      "time_s": 0,
+      "voltage_v": 0,
+      "current_a": 0,
+      "step": 165387,
+      "cycle": 165387,
+      "temperature_c": 165387
+    },
+    "duplicated_timestamps": 0,
+    "non_monotonic_time": 0,
+    "dt_median_s": 1.0,
+    "dt_max_s": 2.0,
+    "n_gaps_gt_5s": 0,
+    "voltage_out_of_range": 0,
+    "current_out_of_range": 0,
+    "voltage_min_max": [
+      2.498,
+      4.199
+    ],
+    "current_min_max": [
+      -0.106,
+      0.111
+    ],
+    "cycle_index_unique": []
+  },
+  "INIT_1A": {
+    "n_rows": 27602,
+    "duration_h": 9.311192421670789,
+    "missing_per_column": {
+      "time_s": 0,
+      "voltage_v": 0,
+      "current_a": 0,
+      "step": 0,
+      "cycle": 0,
+      "temperature_c": 27602
+    },
+    "duplicated_timestamps": 0,
+    "non_monotonic_time": 0,
+    "dt_median_s": 1.0155363722951734,
+    "dt_max_s": 10.01682025239279,
+    "n_gaps_gt_5s": 626,
+    "voltage_out_of_range": 0,
+    "current_out_of_range": 0,
+    "voltage_min_max": [
+      2.4999210834503174,
+      4.20009708404541
+    ],
+    "current_min_max": [
+      -1.000524640083313,
+      1.00031316280365
+    ],
+    "cycle_index_unique": [
+      1
+    ]
+  }
+}

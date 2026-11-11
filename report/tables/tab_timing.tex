@@ -1,0 +1,20 @@
+\begin{table}[htbp]\centering\footnotesize
+\begin{tabular}{lr}
+\toprule
+ & ms per 1000 samples \\
+\midrule
+coulomb & 0.02 \\
+coulomb\_init70 & 0.02 \\
+ekf & 46.93 \\
+ekf\_init70 & 46.96 \\
+ekf\_matched & 48.33 \\
+gru & 14.53 \\
+gru\_sf & 14.13 \\
+hist\_gradient\_boosting & 4.48 \\
+lstm & 21.42 \\
+lstm\_sf & 21.32 \\
+random\_forest & 11.54 \\
+\bottomrule
+\end{tabular}
+\caption{Mean inference time (NumPy/scikit-learn/Python, single CPU core). The EKF figure is a plain Python loop.}\label{tab:timing}
+\end{table}

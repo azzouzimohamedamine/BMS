@@ -1,0 +1,14 @@
+\begin{table}[htbp]\centering\footnotesize
+\begin{tabular}{lrrrrr}
+\toprule
+ & IF & OC-SVM & Threshold & Flatline & Any \\
+\midrule
+current\_sensor\_offset & 1.00 & 1.00 & 1.00 & 0.00 & 1.00 \\
+resistance\_increase & 1.00 & 1.00 & 0.00 & 0.00 & 1.00 \\
+sample\_dropout & 0.25 & 1.00 & 0.00 & 0.00 & 1.00 \\
+voltage\_sensor\_stuck & 0.00 & 0.00 & 0.00 & 1.00 & 1.00 \\
+voltage\_spike & 1.00 & 1.00 & 1.00 & 0.00 & 1.00 \\
+\bottomrule
+\end{tabular}
+\caption{\emph{Simulated} faults (magnitude $\times$1.0) injected into the real 25\,°C signals: event detection rate (4 events per fault type).}\label{tab:faultsim10}
+\end{table}

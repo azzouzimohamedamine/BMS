@@ -1,0 +1,33 @@
+\section{Background and literature review}
+\subsection{Lithium-ion battery fundamentals}
+A lithium-ion cell stores charge in intercalation electrodes; its terminal voltage is the open-circuit voltage (OCV), a monotonic function of SOC at fixed temperature, minus ohmic and polarisation drops that grow at low temperature and high current. Capacity, resistance and OCV depend on temperature and age \cite{waag2014,hu2020joule}. SOC is the fraction of remaining usable charge; SOH is commonly the ratio of present to nominal capacity,
+\begin{equation}
+\mathrm{SOH}=\frac{Q_{\mathrm{now}}}{Q_{\mathrm{nom}}}\times 100\,\%.
+\end{equation}
+
+\subsection{BMS architecture}
+Figure~\ref{fig:arch} summarises the implemented architecture: acquisition, preprocessing and feature extraction feed four estimation layers (SOC, SOH, fault diagnosis, RUL), a decision layer produces provenance-tagged reports, and a dashboard exposes them.
+\begin{figure}[H]\centering
+\fbox{\parbox{0.9\linewidth}{\centering Data files $\rightarrow$ loader (units, de-duplication) $\rightarrow$ segmentation and resampling $\rightarrow$ features\\
+$\downarrow$\\
+SOC \quad|\quad SOH (guarded) \quad|\quad Fault diagnosis \quad|\quad RUL (guarded)\\
+$\downarrow$\\
+BMS engine (MEASURED / CALCULATED / ESTIMATED / SIMULATED / UNAVAILABLE) $\rightarrow$ dashboard and reports}}
+\caption{Software architecture (see \texttt{docs/SYSTEM\_ARCHITECTURE.md}).}\label{fig:arch}
+\end{figure}
+
+\subsection{Related work}
+Table~\ref{tab:lit} summarises the publications used. Entries were cited from memory without database access; they must be verified before submission (see \texttt{report/README.md}), and the dataset/limitation columns are intentionally restricted to what is reliably known.
+\begin{table}[H]\centering\small
+\begin{tabular}{p{2.3cm}p{4.6cm}p{6.6cm}}\toprule
+Reference & Method & Relevance here\\\midrule
+Plett 2004 \cite{plett2004ekf1,plett2004ekf2,plett2004ekf3} & EKF with equivalent-circuit models for LiPB packs & Basis of our EKF and ECM identification\\
+Chemali et al.\ 2018 \cite{chemali2018} & Deep recurrent networks for SOC & Motivates LSTM/GRU baselines\\
+Ng et al.\ 2020 \cite{ng2020} & Data-driven ML for SOC and SOH & Motivates tree/ML baselines for SOC and SOH\\
+Severson et al.\ 2019 \cite{severson2019} & Cycle-life prediction from early-cycle data & Illustrates the multi-cell, multi-cycle data that SOH/RUL need and our files lack\\
+Xing et al.\ 2013, He et al.\ 2011 \cite{xing2013,he2011} & Prognostics on CALCE-type cells & Context for RUL; not reproduced\\
+Weng et al.\ 2014 \cite{weng2014} & OCV modelling for SOC/SOH & Context for our pseudo-OCV from a low-rate discharge\\
+Waag et al.\ 2014, Hu et al.\ 2020 \cite{waag2014,hu2020joule} & Reviews of monitoring and prognostics & Background on states, temperature effects\\
+\bottomrule\end{tabular}
+\caption{Literature used.}\label{tab:lit}
+\end{table}

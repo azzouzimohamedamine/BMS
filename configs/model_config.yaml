@@ -1,0 +1,34 @@
+seed: 42
+soc:
+  ts_s: 20.0                 # uniform resampling period
+  feature_lag_s: 600         # causal lag for V moving average / dV
+  window_len: 30             # sequence length for LSTM/GRU (30 x 20 s = 10 min)
+  window_stride_train: 2
+  reference_condition: T25C_lowI    # calibrated capacity + ECM identified here (cross-condition protocol)
+  cv_blocks: 5               # contiguous blocks for blocked CV (with gap = window_len samples)
+  random_forest:
+    n_estimators: [150]
+    max_depth: [8, null]
+    min_samples_leaf: [5, 50]
+  hist_gradient_boosting:
+    learning_rate: [0.05, 0.1]
+    max_depth: [3, 6]
+    max_iter: [200]
+  rnn:
+    hidden: 16
+    lr: 0.005
+    batch: 128
+    epochs: 40
+    patience: 6
+    val_fraction: 0.15
+  ekf:
+    q_soc: 1.0e-9
+    q_v1: 1.0e-7
+    r_meas_v: 0.005
+    p0_soc: 0.0025
+  noise_levels:              # SIMULATED perturbations added to the real test signals
+    - {name: clean,  sigma_v: 0.0,   sigma_i: 0.0,   bias_i: 0.0}
+    - {name: low,    sigma_v: 0.005, sigma_i: 0.010, bias_i: 0.0}
+    - {name: medium, sigma_v: 0.010, sigma_i: 0.025, bias_i: 0.0}
+    - {name: high,   sigma_v: 0.020, sigma_i: 0.050, bias_i: 0.0}
+    - {name: i_bias_20mA, sigma_v: 0.0, sigma_i: 0.0, bias_i: 0.020}

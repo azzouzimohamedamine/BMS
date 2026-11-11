@@ -1,0 +1,234 @@
+{
+  "protocols": [
+    {
+      "train": [
+        "T25C_lowI"
+      ],
+      "n_train": 3871,
+      "models": {
+        "random_forest": {
+          "best_hp": {
+            "max_depth": 8,
+            "min_samples_leaf": 5,
+            "n_estimators": 150
+          },
+          "cv_mae": 0.0815388879115517,
+          "fit_time_s": 0.38646435737609863
+        },
+        "hist_gradient_boosting": {
+          "best_hp": {
+            "learning_rate": 0.05,
+            "max_depth": 3,
+            "max_iter": 200
+          },
+          "cv_mae": 0.08029785399439457,
+          "fit_time_s": 0.058011531829833984
+        },
+        "gru": {
+          "val_mae": 0.04301517893866657,
+          "epochs_run": 4,
+          "train_time_s": 0.22986793518066406
+        },
+        "lstm": {
+          "val_mae": 0.05126173662782953,
+          "epochs_run": 4,
+          "train_time_s": 0.20659828186035156
+        }
+      }
+    },
+    {
+      "train": [
+        "T25C_lowI",
+        "T45C_lowI"
+      ],
+      "n_train": 7500,
+      "models": {
+        "random_forest": {
+          "best_hp": {
+            "max_depth": 8,
+            "min_samples_leaf": 5,
+            "n_estimators": 150
+          },
+          "cv_mae": 0.08249909437971886,
+          "fit_time_s": 0.6493000984191895
+        },
+        "hist_gradient_boosting": {
+          "best_hp": {
+            "learning_rate": 0.05,
+            "max_depth": 3,
+            "max_iter": 200
+          },
+          "cv_mae": 0.06811202370796746,
+          "fit_time_s": 0.05893754959106445
+        },
+        "gru": {
+          "val_mae": 0.038399735887385725,
+          "epochs_run": 4,
+          "train_time_s": 0.39272522926330566
+        },
+        "lstm": {
+          "val_mae": 0.049948269849484764,
+          "epochs_run": 4,
+          "train_time_s": 0.46012091636657715
+        }
+      }
+    },
+    {
+      "train": [
+        "T00C_lowI",
+        "T25C_lowI"
+      ],
+      "n_train": 7235,
+      "models": {
+        "random_forest": {
+          "best_hp": {
+            "max_depth": 8,
+            "min_samples_leaf": 5,
+            "n_estimators": 150
+          },
+          "cv_mae": 0.08127310184423711,
+          "fit_time_s": 0.8322548866271973
+        },
+        "hist_gradient_boosting": {
+          "best_hp": {
+            "learning_rate": 0.05,
+            "max_depth": 3,
+            "max_iter": 200
+          },
+          "cv_mae": 0.07435351026056261,
+          "fit_time_s": 0.06118011474609375
+        },
+        "gru": {
+          "val_mae": 0.05176450039641942,
+          "epochs_run": 4,
+          "train_time_s": 0.3906135559082031
+        },
+        "lstm": {
+          "val_mae": 0.06394112402644296,
+          "epochs_run": 4,
+          "train_time_s": 0.44345879554748535
+        }
+      }
+    },
+    {
+      "train": [
+        "T00C_lowI",
+        "T45C_lowI"
+      ],
+      "n_train": 6993,
+      "models": {
+        "random_forest": {
+          "best_hp": {
+            "max_depth": 8,
+            "min_samples_leaf": 5,
+            "n_estimators": 150
+          },
+          "cv_mae": 0.08376636925903465,
+          "fit_time_s": 0.8421523571014404
+        },
+        "hist_gradient_boosting": {
+          "best_hp": {
+            "learning_rate": 0.05,
+            "max_depth": 3,
+            "max_iter": 200
+          },
+          "cv_mae": 0.0730151804058905,
+          "fit_time_s": 0.06424212455749512
+        },
+        "gru": {
+          "val_mae": 0.045082697283339516,
+          "epochs_run": 4,
+          "train_time_s": 0.3803839683532715
+        },
+        "lstm": {
+          "val_mae": 0.05914569983876097,
+          "epochs_run": 4,
+          "train_time_s": 0.424713134765625
+        }
+      }
+    },
+    {
+      "train": [
+        "T00C_lowI",
+        "T25C_lowI",
+        "T45C_lowI"
+      ],
+      "n_train": 10864,
+      "models": {
+        "random_forest": {
+          "best_hp": {
+            "max_depth": 8,
+            "min_samples_leaf": 5,
+            "n_estimators": 150
+          },
+          "cv_mae": 0.08334028761844345,
+          "fit_time_s": 1.2439160346984863
+        },
+        "hist_gradient_boosting": {
+          "best_hp": {
+            "learning_rate": 0.05,
+            "max_depth": 3,
+            "max_iter": 200
+          },
+          "cv_mae": 0.07318880989450052,
+          "fit_time_s": 0.1045074462890625
+        },
+        "gru": {
+          "val_mae": 0.06313358738373885,
+          "epochs_run": 4,
+          "train_time_s": 0.6806762218475342
+        },
+        "lstm": {
+          "val_mae": 0.04374723140001905,
+          "epochs_run": 4,
+          "train_time_s": 0.6489462852478027
+        }
+      }
+    }
+  ],
+  "ecm_reference": {
+    "r0": 0.08034884054930054,
+    "r1": 0.028014814467264042,
+    "tau_s": 141.04243991678564
+  },
+  "q_cal_ah": 2.1568513888902663,
+  "xgboost_available": false,
+  "conditions": {
+    "T00C_lowI": {
+      "capacity_ah": 1.8816302032926058,
+      "mean_current_a": -0.0998506364246179,
+      "nominal_temp_c": 0,
+      "v_start": 4.163778305053711,
+      "v_end": 2.4999029636383057,
+      "v_rest_before": 4.177987197240194,
+      "duration_s": 67840.00846148637
+    },
+    "T25C_lowI": {
+      "capacity_ah": 2.1568513888902663,
+      "mean_current_a": -0.09956584246030728,
+      "nominal_temp_c": 25,
+      "v_start": 4.175,
+      "v_end": 2.496,
+      "v_rest_before": 4.183000000000001,
+      "duration_s": 77985.0
+    },
+    "T45C_lowI": {
+      "capacity_ah": 2.0221525000010914,
+      "mean_current_a": -0.0995243348918601,
+      "nominal_temp_c": 45,
+      "v_start": 4.16,
+      "v_end": 2.501,
+      "v_rest_before": 4.1682049999999995,
+      "duration_s": 73145.0
+    },
+    "INIT_1A": {
+      "capacity_ah": 2.009165139271267,
+      "mean_current_a": -1.0001052313299341,
+      "nominal_temp_c": null,
+      "v_start": 4.06659746170044,
+      "v_end": 2.4999210834503174,
+      "v_rest_before": 4.192909142971039,
+      "duration_s": 7232.233410777542
+    }
+  }
+}

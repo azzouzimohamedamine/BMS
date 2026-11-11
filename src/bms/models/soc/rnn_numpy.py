@@ -85,9 +85,10 @@ class RNNRegressor:
         return np.concatenate([self.forward(Xs[k:k + batch])[0] for k in range(0, len(Xs), batch)])
 
     def fit(self, X: np.ndarray, y: np.ndarray, X_val: np.ndarray, y_val: np.ndarray, lr: float = 5e-3,
-            batch: int = 128, epochs: int = 40, patience: int = 6, seed: int = 0, clip: float = 1.0) -> dict[str, Any]:
+            batch: int = 128, epochs: int = 40, patience: int = 6, seed: int = 0, clip: float = 1.0,
+            min_std: float | np.ndarray = 1e-8) -> dict[str, Any]:
         """Adam + early stopping on a validation set; scaling statistics come from the TRAINING data only."""
-        self.x_mean = X.reshape(-1, X.shape[-1]).mean(0); self.x_std = X.reshape(-1, X.shape[-1]).std(0) + 1e-8
+        self.x_mean = X.reshape(-1, X.shape[-1]).mean(0); self.x_std = np.maximum(X.reshape(-1, X.shape[-1]).std(0), min_std) + 1e-8
         Xs, Xv = (X - self.x_mean) / self.x_std, (X_val - self.x_mean) / self.x_std
         rng = np.random.default_rng(seed)
         m = {k: np.zeros_like(v) for k, v in self.p.items()}; v2 = {k: np.zeros_like(v) for k, v in self.p.items()}

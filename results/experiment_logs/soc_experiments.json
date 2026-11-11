@@ -8,31 +8,41 @@
       "models": {
         "random_forest": {
           "best_hp": {
-            "max_depth": 8,
+            "max_depth": null,
             "min_samples_leaf": 5,
             "n_estimators": 150
           },
-          "cv_mae": 0.0815388879115517,
-          "fit_time_s": 0.38646435737609863
+          "cv_mae": 0.0812686058252372,
+          "fit_time_s": 0.41888904571533203
         },
         "hist_gradient_boosting": {
           "best_hp": {
-            "learning_rate": 0.05,
-            "max_depth": 3,
+            "learning_rate": 0.1,
+            "max_depth": 6,
             "max_iter": 200
           },
-          "cv_mae": 0.08029785399439457,
-          "fit_time_s": 0.058011531829833984
+          "cv_mae": 0.0744559108300656,
+          "fit_time_s": 0.13381361961364746
         },
         "gru": {
           "val_mae": 0.04301517893866657,
-          "epochs_run": 4,
-          "train_time_s": 0.22986793518066406
+          "epochs_run": 8,
+          "train_time_s": 0.4783167839050293
         },
         "lstm": {
           "val_mae": 0.05126173662782953,
-          "epochs_run": 4,
-          "train_time_s": 0.20659828186035156
+          "epochs_run": 9,
+          "train_time_s": 0.5675692558288574
+        },
+        "gru_sf": {
+          "val_mae": 0.04393425677813983,
+          "epochs_run": 8,
+          "train_time_s": 0.4532201290130615
+        },
+        "lstm_sf": {
+          "val_mae": 0.02610815974784047,
+          "epochs_run": 10,
+          "train_time_s": 0.6269874572753906
         }
       }
     },
@@ -45,31 +55,41 @@
       "models": {
         "random_forest": {
           "best_hp": {
-            "max_depth": 8,
+            "max_depth": null,
             "min_samples_leaf": 5,
             "n_estimators": 150
           },
-          "cv_mae": 0.08249909437971886,
-          "fit_time_s": 0.6493000984191895
+          "cv_mae": 0.08176616682649784,
+          "fit_time_s": 0.7939698696136475
         },
         "hist_gradient_boosting": {
           "best_hp": {
-            "learning_rate": 0.05,
+            "learning_rate": 0.1,
             "max_depth": 3,
             "max_iter": 200
           },
-          "cv_mae": 0.06811202370796746,
-          "fit_time_s": 0.05893754959106445
+          "cv_mae": 0.0671079239855644,
+          "fit_time_s": 0.058992862701416016
         },
         "gru": {
           "val_mae": 0.038399735887385725,
-          "epochs_run": 4,
-          "train_time_s": 0.39272522926330566
+          "epochs_run": 7,
+          "train_time_s": 0.723846435546875
         },
         "lstm": {
-          "val_mae": 0.049948269849484764,
-          "epochs_run": 4,
-          "train_time_s": 0.46012091636657715
+          "val_mae": 0.022103131626117933,
+          "epochs_run": 35,
+          "train_time_s": 3.7690622806549072
+        },
+        "gru_sf": {
+          "val_mae": 0.03942991184400575,
+          "epochs_run": 7,
+          "train_time_s": 0.6808855533599854
+        },
+        "lstm_sf": {
+          "val_mae": 0.02701104716197671,
+          "epochs_run": 24,
+          "train_time_s": 2.850353717803955
         }
       }
     },
@@ -82,31 +102,41 @@
       "models": {
         "random_forest": {
           "best_hp": {
-            "max_depth": 8,
+            "max_depth": null,
             "min_samples_leaf": 5,
             "n_estimators": 150
           },
-          "cv_mae": 0.08127310184423711,
-          "fit_time_s": 0.8322548866271973
+          "cv_mae": 0.08046893175662843,
+          "fit_time_s": 0.9649124145507812
         },
         "hist_gradient_boosting": {
           "best_hp": {
-            "learning_rate": 0.05,
+            "learning_rate": 0.1,
             "max_depth": 3,
             "max_iter": 200
           },
-          "cv_mae": 0.07435351026056261,
-          "fit_time_s": 0.06118011474609375
+          "cv_mae": 0.07010425863843006,
+          "fit_time_s": 0.059422969818115234
         },
         "gru": {
           "val_mae": 0.05176450039641942,
-          "epochs_run": 4,
-          "train_time_s": 0.3906135559082031
+          "epochs_run": 7,
+          "train_time_s": 0.6633579730987549
         },
         "lstm": {
-          "val_mae": 0.06394112402644296,
-          "epochs_run": 4,
-          "train_time_s": 0.44345879554748535
+          "val_mae": 0.006454947243887962,
+          "epochs_run": 40,
+          "train_time_s": 4.243751287460327
+        },
+        "gru_sf": {
+          "val_mae": 0.0408532743167307,
+          "epochs_run": 7,
+          "train_time_s": 0.7116439342498779
+        },
+        "lstm_sf": {
+          "val_mae": 0.007713675969808007,
+          "epochs_run": 40,
+          "train_time_s": 4.5796613693237305
         }
       }
     },
@@ -119,31 +149,41 @@
       "models": {
         "random_forest": {
           "best_hp": {
-            "max_depth": 8,
+            "max_depth": null,
             "min_samples_leaf": 5,
             "n_estimators": 150
           },
-          "cv_mae": 0.08376636925903465,
-          "fit_time_s": 0.8421523571014404
+          "cv_mae": 0.08256024894749023,
+          "fit_time_s": 0.9715702533721924
         },
         "hist_gradient_boosting": {
           "best_hp": {
-            "learning_rate": 0.05,
+            "learning_rate": 0.1,
             "max_depth": 3,
             "max_iter": 200
           },
-          "cv_mae": 0.0730151804058905,
-          "fit_time_s": 0.06424212455749512
+          "cv_mae": 0.07085787991880685,
+          "fit_time_s": 0.05932116508483887
         },
         "gru": {
           "val_mae": 0.045082697283339516,
-          "epochs_run": 4,
-          "train_time_s": 0.3803839683532715
+          "epochs_run": 7,
+          "train_time_s": 0.6248002052307129
         },
         "lstm": {
-          "val_mae": 0.05914569983876097,
-          "epochs_run": 4,
-          "train_time_s": 0.424713134765625
+          "val_mae": 0.016341940935823578,
+          "epochs_run": 34,
+          "train_time_s": 3.3935585021972656
+        },
+        "gru_sf": {
+          "val_mae": 0.03716186558788489,
+          "epochs_run": 7,
+          "train_time_s": 0.6479201316833496
+        },
+        "lstm_sf": {
+          "val_mae": 0.015821714392092127,
+          "epochs_run": 40,
+          "train_time_s": 4.439024448394775
         }
       }
     },
@@ -157,12 +197,12 @@
       "models": {
         "random_forest": {
           "best_hp": {
-            "max_depth": 8,
+            "max_depth": null,
             "min_samples_leaf": 5,
             "n_estimators": 150
           },
-          "cv_mae": 0.08334028761844345,
-          "fit_time_s": 1.2439160346984863
+          "cv_mae": 0.081864058215537,
+          "fit_time_s": 1.5229525566101074
         },
         "hist_gradient_boosting": {
           "best_hp": {
@@ -171,17 +211,27 @@
             "max_iter": 200
           },
           "cv_mae": 0.07318880989450052,
-          "fit_time_s": 0.1045074462890625
+          "fit_time_s": 0.10132193565368652
         },
         "gru": {
-          "val_mae": 0.06313358738373885,
-          "epochs_run": 4,
-          "train_time_s": 0.6806762218475342
+          "val_mae": 0.0089016569906998,
+          "epochs_run": 40,
+          "train_time_s": 6.266705751419067
         },
         "lstm": {
-          "val_mae": 0.04374723140001905,
-          "epochs_run": 4,
-          "train_time_s": 0.6489462852478027
+          "val_mae": 0.013684339530879542,
+          "epochs_run": 36,
+          "train_time_s": 5.7799293994903564
+        },
+        "gru_sf": {
+          "val_mae": 0.018023074317853313,
+          "epochs_run": 40,
+          "train_time_s": 6.162970066070557
+        },
+        "lstm_sf": {
+          "val_mae": 0.012949418057784427,
+          "epochs_run": 40,
+          "train_time_s": 6.388198614120483
         }
       }
     }

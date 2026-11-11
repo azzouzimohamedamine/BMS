@@ -1,0 +1,5 @@
+dataset,n_windows,used_for_training,flagged_iso,flagged_ocsvm,flagged_threshold,flagged_flatline,flagged_any
+T00C_lowI,5239,True,33,37,45,37,96
+T25C_lowI,5646,False,31,33,10,0,39
+T45C_lowI,5511,True,21,17,9,0,25
+INIT_1A,1116,False,20,221,44,75,245

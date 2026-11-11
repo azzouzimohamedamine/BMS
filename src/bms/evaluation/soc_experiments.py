@@ -131,12 +131,12 @@ def run_soc_experiments(out_dir=None, quick: bool = False) -> dict[str, Any]:
                 va_idx.append(np.arange(lo, hi) + off)
                 tr_idx.append(np.r_[np.arange(0, max(0, lo - L)), np.arange(hi + L, n_w)][::sc["window_stride_train"]] + off); off += n_w
             Wall, Yall = np.concatenate(Ws), np.concatenate(Ys); tr, va = np.concatenate(tr_idx), np.concatenate(va_idx)
-            for cell in ("gru", "lstm"):
+            for tag, cell, floor in (("gru", "gru", 1e-8), ("lstm", "lstm", 1e-8), ("gru_sf", "gru", np.array([0.05, 0.1])), ("lstm_sf", "lstm", np.array([0.05, 0.1]))):
                 net = RNNRegressor(cell, Wall.shape[-1], sc["rnn"]["hidden"], seed)
                 r = net.fit(Wall[tr], Yall[tr], Wall[va], Yall[va], sc["rnn"]["lr"], sc["rnn"]["batch"],
-                            4 if quick else sc["rnn"]["epochs"], sc["rnn"]["patience"], seed)
-                info[cell] = {k: v for k, v in r.items() if k != "val_history"}
-                fitted[cell] = net; net.save(model_dir / f"soc_{cell}__{'+'.join(train)}.npz")
+                            4 if quick else sc["rnn"]["epochs"], sc["rnn"]["patience"], seed, min_std=floor)
+                info[tag] = {k: v for k, v in r.items() if k != "val_history"}
+                fitted[tag] = net; net.save(model_dir / f"soc_{tag}__{'+'.join(train)}.npz")
             cache[train] = {"fitted": fitted, "info": info}
             logs["protocols"].append({"train": list(train), "n_train": int(len(y)), "models": {k: {kk: vv for kk, vv in v.items() if kk != "search"} for k, v in info.items()}})
             log.info("trained on %s: %s", train, {k: (round(v.get('cv_mae', v.get('val_mae', 0)), 4)) for k, v in info.items()})
@@ -145,7 +145,7 @@ def run_soc_experiments(out_dir=None, quick: bool = False) -> dict[str, Any]:
             rng = np.random.default_rng(seed + 1)
             X, y, raw2, t = tab(test, nl, rng)
             for n, mdl in fitted.items():
-                if n in ("gru", "lstm"):
+                if n.startswith(("gru", "lstm")):
                     Wt, _, _ = make_windows(raw2, np.r_[np.zeros(L - 1), y], L, 1); p, dt = _timed(lambda: mdl.predict(Wt)); n_s = len(Wt)
                 else:
                     p, dt = _timed(lambda: mdl.predict(X)); n_s = len(X)

@@ -1,0 +1,5 @@
+dataset_id,nominal_temp_c(label),mean_current_a,delivered_capacity_ah,capacity_ratio_vs_T25C_lowI(%),R0_onset_ohm,is_SOH
+T00C_lowI,0.0,-0.0999,1.8816,87.24,0.1321,False
+T25C_lowI,25.0,-0.0996,2.1569,100.0,0.0803,False
+T45C_lowI,45.0,-0.0995,2.0222,93.75,0.0824,False
+INIT_1A,,-1.0001,2.0092,93.15,0.1258,False

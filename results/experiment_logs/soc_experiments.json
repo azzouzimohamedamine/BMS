@@ -13,7 +13,7 @@
             "n_estimators": 150
           },
           "cv_mae": 0.0812686058252372,
-          "fit_time_s": 0.41888904571533203
+          "fit_time_s": 0.41840052604675293
         },
         "hist_gradient_boosting": {
           "best_hp": {
@@ -22,27 +22,27 @@
             "max_iter": 200
           },
           "cv_mae": 0.0744559108300656,
-          "fit_time_s": 0.13381361961364746
+          "fit_time_s": 0.13580632209777832
         },
         "gru": {
           "val_mae": 0.04301517893866657,
           "epochs_run": 8,
-          "train_time_s": 0.4783167839050293
+          "train_time_s": 0.47835636138916016
         },
         "lstm": {
           "val_mae": 0.05126173662782953,
           "epochs_run": 9,
-          "train_time_s": 0.5675692558288574
+          "train_time_s": 0.5997393131256104
         },
         "gru_sf": {
           "val_mae": 0.04393425677813983,
           "epochs_run": 8,
-          "train_time_s": 0.4532201290130615
+          "train_time_s": 0.48218774795532227
         },
         "lstm_sf": {
           "val_mae": 0.02610815974784047,
           "epochs_run": 10,
-          "train_time_s": 0.6269874572753906
+          "train_time_s": 0.641035795211792
         }
       }
     },
@@ -60,7 +60,7 @@
             "n_estimators": 150
           },
           "cv_mae": 0.08176616682649784,
-          "fit_time_s": 0.7939698696136475
+          "fit_time_s": 0.7909765243530273
         },
         "hist_gradient_boosting": {
           "best_hp": {
@@ -69,27 +69,27 @@
             "max_iter": 200
           },
           "cv_mae": 0.0671079239855644,
-          "fit_time_s": 0.058992862701416016
+          "fit_time_s": 0.05940675735473633
         },
         "gru": {
           "val_mae": 0.038399735887385725,
           "epochs_run": 7,
-          "train_time_s": 0.723846435546875
+          "train_time_s": 0.6797306537628174
         },
         "lstm": {
           "val_mae": 0.022103131626117933,
           "epochs_run": 35,
-          "train_time_s": 3.7690622806549072
+          "train_time_s": 4.135645866394043
         },
         "gru_sf": {
           "val_mae": 0.03942991184400575,
           "epochs_run": 7,
-          "train_time_s": 0.6808855533599854
+          "train_time_s": 0.8030354976654053
         },
         "lstm_sf": {
           "val_mae": 0.02701104716197671,
           "epochs_run": 24,
-          "train_time_s": 2.850353717803955
+          "train_time_s": 2.660626173019409
         }
       }
     },
@@ -107,7 +107,7 @@
             "n_estimators": 150
           },
           "cv_mae": 0.08046893175662843,
-          "fit_time_s": 0.9649124145507812
+          "fit_time_s": 1.0409390926361084
         },
         "hist_gradient_boosting": {
           "best_hp": {
@@ -116,27 +116,27 @@
             "max_iter": 200
           },
           "cv_mae": 0.07010425863843006,
-          "fit_time_s": 0.059422969818115234
+          "fit_time_s": 0.0690922737121582
         },
         "gru": {
           "val_mae": 0.05176450039641942,
           "epochs_run": 7,
-          "train_time_s": 0.6633579730987549
+          "train_time_s": 0.7785360813140869
         },
         "lstm": {
           "val_mae": 0.006454947243887962,
           "epochs_run": 40,
-          "train_time_s": 4.243751287460327
+          "train_time_s": 4.765727281570435
         },
         "gru_sf": {
           "val_mae": 0.0408532743167307,
           "epochs_run": 7,
-          "train_time_s": 0.7116439342498779
+          "train_time_s": 0.7152378559112549
         },
         "lstm_sf": {
           "val_mae": 0.007713675969808007,
           "epochs_run": 40,
-          "train_time_s": 4.5796613693237305
+          "train_time_s": 4.870057582855225
         }
       }
     },
@@ -154,7 +154,7 @@
             "n_estimators": 150
           },
           "cv_mae": 0.08256024894749023,
-          "fit_time_s": 0.9715702533721924
+          "fit_time_s": 0.9656448364257812
         },
         "hist_gradient_boosting": {
           "best_hp": {
@@ -163,27 +163,27 @@
             "max_iter": 200
           },
           "cv_mae": 0.07085787991880685,
-          "fit_time_s": 0.05932116508483887
+          "fit_time_s": 0.0602107048034668
         },
         "gru": {
           "val_mae": 0.045082697283339516,
           "epochs_run": 7,
-          "train_time_s": 0.6248002052307129
+          "train_time_s": 0.6387531757354736
         },
         "lstm": {
           "val_mae": 0.016341940935823578,
           "epochs_run": 34,
-          "train_time_s": 3.3935585021972656
+          "train_time_s": 3.53216552734375
         },
         "gru_sf": {
           "val_mae": 0.03716186558788489,
           "epochs_run": 7,
-          "train_time_s": 0.6479201316833496
+          "train_time_s": 0.6708555221557617
         },
         "lstm_sf": {
           "val_mae": 0.015821714392092127,
           "epochs_run": 40,
-          "train_time_s": 4.439024448394775
+          "train_time_s": 4.6741042137146
         }
       }
     },
@@ -202,7 +202,7 @@
             "n_estimators": 150
           },
           "cv_mae": 0.081864058215537,
-          "fit_time_s": 1.5229525566101074
+          "fit_time_s": 1.5190982818603516
         },
         "hist_gradient_boosting": {
           "best_hp": {
@@ -211,27 +211,27 @@
             "max_iter": 200
           },
           "cv_mae": 0.07318880989450052,
-          "fit_time_s": 0.10132193565368652
+          "fit_time_s": 0.11068415641784668
         },
         "gru": {
           "val_mae": 0.0089016569906998,
           "epochs_run": 40,
-          "train_time_s": 6.266705751419067
+          "train_time_s": 5.67563009262085
         },
         "lstm": {
           "val_mae": 0.013684339530879542,
           "epochs_run": 36,
-          "train_time_s": 5.7799293994903564
+          "train_time_s": 5.9079670906066895
         },
         "gru_sf": {
           "val_mae": 0.018023074317853313,
           "epochs_run": 40,
-          "train_time_s": 6.162970066070557
+          "train_time_s": 6.474716663360596
         },
         "lstm_sf": {
           "val_mae": 0.012949418057784427,
           "epochs_run": 40,
-          "train_time_s": 6.388198614120483
+          "train_time_s": 7.490674018859863
         }
       }
     }

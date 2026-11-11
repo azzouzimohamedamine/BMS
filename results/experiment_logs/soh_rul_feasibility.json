@@ -1,0 +1,9 @@
+{
+  "soh_percent": "NOT COMPUTED: Nominal capacity is not verified from reliable documentation: SOH(%) is not computed.",
+  "rul": {
+    "T00C_lowI": "NOT FEASIBLE: 1 distinct cycle(s) available (< 30): no degradation trajectory.",
+    "T25C_lowI": "NOT FEASIBLE: 1 distinct cycle(s) available (< 30): no degradation trajectory.",
+    "T45C_lowI": "NOT FEASIBLE: 1 distinct cycle(s) available (< 30): no degradation trajectory.",
+    "INIT_1A": "NOT FEASIBLE: 1 distinct cycle(s) available (< 30): no degradation trajectory."
+  }
+}

@@ -85,7 +85,7 @@ def run_soc_experiments(out_dir=None, quick: bool = False) -> dict[str, Any]:
         rows.append({"protocol": proto, "train": "+".join(train), "test": test, "model": model, "noise": nl["name"], **m,
                      "MAE_after_30min": m2["MAE"], "MaxAE_after_30min": m2["MaxAE"], "infer_ms_per_1k": infer_ms, **(extra or {})})
         if nl["name"] == "clean":
-            preds.append(pd.DataFrame({"protocol": proto, "test": test, "model": model, "t_s": t[::3], "soc_ref": y[::3], "soc_pred": p[::3]}))
+            preds.append(pd.DataFrame({"protocol": proto, "train": "+".join(train), "test": test, "model": model, "t_s": t[::3], "soc_ref": y[::3], "soc_pred": p[::3]}))
 
     # ---------------------------------------------------------------- physics-based baselines (reference-condition protocol)
     for test in [c for c in conds if c != ref]:

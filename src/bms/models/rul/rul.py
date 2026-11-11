@@ -23,10 +23,10 @@ def assert_rul_feasible(cycles: np.ndarray, capacity_ah: np.ndarray, nominal_ah:
                         threshold: float = 0.8) -> int:
     """Return the EOL cycle or raise ``InsufficientDataError`` explaining why RUL cannot be defined."""
     cycles = np.unique(cycles)
-    if nominal_ah is None or not nominal_verified:
-        raise InsufficientDataError("Nominal capacity not verified: EOL threshold cannot be defined.")
     if len(cycles) < MIN_CYCLES:
         raise InsufficientDataError(f"{len(cycles)} distinct cycle(s) available (< {MIN_CYCLES}): no degradation trajectory.")
+    if nominal_ah is None or not nominal_verified:
+        raise InsufficientDataError("Nominal capacity not verified: EOL threshold cannot be defined.")
     eol = find_eol_cycle(cycles, capacity_ah, nominal_ah, threshold)
     if eol is None:
         raise InsufficientDataError("Capacity never reaches the EOL threshold: true RUL labels would have to be invented.")

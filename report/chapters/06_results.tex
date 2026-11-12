@@ -20,8 +20,8 @@ Table~\ref{tab:noise} (Fig.~\ref{fig:noise}): the EKF is insensitive to noise at
 \begin{figure}[H]\centering\includegraphics[width=0.75\linewidth]{fig06_noise_robustness.png}\caption{Noise robustness (simulated perturbations).}\label{fig:noise}\end{figure}
 \input{tables/tab_timing}
 
-\subsection{SOH and RUL}
-SOH(\%) is not computed: nominal capacity is unverified and one cycle per file gives no degradation trajectory. RUL is not defined for the same reasons (\texttt{results/experiment\_logs/soh\_rul\_feasibility.json}). The delivered-capacity ratios of Table~\ref{tab:capacity} mix temperature, rate and history and are not SOH.
+\subsection{SOH and RUL}\label{sec:results}
+On the CALCE files SOH(\%) is not computed: nominal capacity is unverified and one cycle per file gives no degradation trajectory. RUL is not defined for the same reasons (\texttt{results/experiment\_logs/soh\_rul\_feasibility.json}). The delivered-capacity ratios of Table~\ref{tab:capacity} mix temperature, rate and history and are not SOH. SOH and RUL are evaluated on ageing datasets in Section~\ref{sec:aging}.
 
 \subsection{Fault diagnosis}
 On real data the detectors flag few windows (Table~\ref{tab:faultreal}); of the 80 top-ranked windows (20 per dataset), 50 lie within two minutes of a protocol step transition and are labelled as probable operational events by the decision layer; the remaining 30 are unexplained statistical anomalies. None constitutes evidence of a real fault. The persistence rule fires on constant-voltage charge phases, which are expected. On \emph{simulated} faults (Tables~\ref{tab:faultsim10}, \ref{tab:faultsim05}) the combined detector finds every event at magnitude $\times$1 and $\times$0.5, with different detectors responsible for different fault types; at magnitude $\times$0.25 the extra-resistance fault is missed. Window precision of the combined detector is low (0.24--0.55 at $\times$1), because detectors also flag genuine transitions.

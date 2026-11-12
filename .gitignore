@@ -3,6 +3,9 @@ data/raw/CALCE/*
 !data/raw/CALCE/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
+# Kaggle ageing datasets: licence not verified -> never commit
+data/raw/KAGGLE/*
+!data/raw/KAGGLE/.gitkeep
 # Python / tooling
 __pycache__/
 *.pyc

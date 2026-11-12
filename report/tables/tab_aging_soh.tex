@@ -1,0 +1,22 @@
+\begin{table}[htbp]\centering\footnotesize
+\begin{tabular}{lllrrrrr}
+\toprule
+ &  &  & Batt. & MAE & RMSE & R$^2$ & MaxAE \\
+Data & Features & Model &  &  &  &  &  \\
+\midrule
+\multirow[t]{4}{*}{NASA-style} & \multirow[t]{2}{*}{base} & random\_forest & 7 & 3.38 & 4.13 & 0.80 & 10.24 \\
+ &  & linear & 7 & 6.07 & 7.39 & 0.36 & 26.06 \\
+\cline{2-8}
+ & \multirow[t]{2}{*}{cycle only} & linear & 7 & 8.81 & 10.05 & -0.19 & 18.93 \\
+ &  & random\_forest & 7 & 9.00 & 10.45 & -0.29 & 21.45 \\
+\cline{1-8} \cline{2-8}
+\multirow[t]{4}{*}{PyBaMM (sim.)} & \multirow[t]{2}{*}{cycle only} & linear & 6 & 1.60 & 2.16 & 0.93 & 6.15 \\
+ &  & random\_forest & 6 & 1.62 & 2.14 & 0.93 & 6.58 \\
+\cline{2-8}
+ & \multirow[t]{2}{*}{base} & random\_forest & 6 & 1.89 & 2.35 & 0.92 & 5.62 \\
+ &  & linear & 6 & 3.52 & 4.41 & 0.72 & 11.03 \\
+\cline{1-8} \cline{2-8}
+\bottomrule
+\end{tabular}
+\caption{SOH leave-one-battery-out, pooled over held-out batteries (SOH points). ``PyBaMM (sim.)'' rows are \emph{simulated} data.}\label{tab:tab_aging_soh}
+\end{table}

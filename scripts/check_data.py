@@ -20,5 +20,13 @@ for e in cfg["datasets"]:
         print(f"[OK]      {e['id']:10s} {p.name}  rows={len(df)}  V=[{df.voltage_v.min():.2f},{df.voltage_v.max():.2f}]")
     except Exception as exc:  # noqa: BLE001
         ok = False; print(f"[ERROR]   {e['id']:10s} {p.name}: {exc}")
-print("\nALL GOOD - you can run the experiments." if ok else "\nFix the items above, then re-run this script.")
+print("\n--- Ageing datasets (data/raw/KAGGLE, needed for SOH/RUL experiments) ---")
+from bms.data.aging_loader import load_aging, load_aging_config, missing_aging_files  # noqa: E402
+acfg = load_aging_config(); miss = missing_aging_files(acfg)
+for d in acfg["datasets"]:
+    if d["file"] in miss:
+        print(f"[MISSING] {d['id']:14s} -> {d['file']}  (optional: only SOH/RUL experiments need it)"); continue
+    df = load_aging(d["id"], acfg)
+    print(f"[OK]      {d['id']:14s} rows={len(df)} batteries={df.battery_id.nunique()} provenance={d['provenance']}")
+print("\nALL GOOD for CALCE - you can run the SOC experiments." if ok else "\nFix the CALCE items above, then re-run this script.")
 sys.exit(0 if ok else 1)

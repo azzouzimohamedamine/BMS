@@ -35,3 +35,6 @@ Implemented as guarded pipelines (`models/soh`, `models/rul`) that raise `Insuff
 * Simulation: five synthetic fault types injected into the real 25 °C signal (4 events × 300 s, 4 magnitudes). Used only to benchmark detectors; **never** presented as real faults.
 * Diagnostic layer (`models/fault/diagnosis.py`): measurement involved, severity, agreement-based confidence, interpretation (flags probable protocol transitions), recommended investigation, provenance.
 * Autoencoder and supervised classifiers were **not** implemented: no labels and too little structured data to justify them.
+
+## 6. SOH / RUL on ageing datasets (Kaggle CSV)
+See `configs/aging_dataset_config.yaml` and `docs/AGING_EXPERIMENTS.md`. Rule-based battery audit → causal features (history uses cycles ≤ k) → leave-one-battery-out with inner leave-one-battery-out tuning (Random Forest grid) → models: Linear Regression (winsorised + scaled on training data), Random Forest; RUL baselines: mean training life and causal linear extrapolation to 70 %. Transfer: 24 °C ↔ 4 °C. Ablation: artificial replicas added to training batteries only. Labels: SOH_rel = Q/Q₁·100; EOL = first cycle with Q ≤ 0.70·Q₁; RUL = EOL − cycle.

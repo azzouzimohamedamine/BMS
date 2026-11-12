@@ -54,3 +54,24 @@ write("tab_fault_real", rf, "%.0f", "Windows flagged on the \\emph{real} data (s
 for f in (R / "results" / "figures").glob("*.png"):
     shutil.copy(f, R / "report" / "figures" / f.name)
 print(sorted(p.name for p in T.glob("*.tex")))
+
+# ---------------- ageing datasets (SOH / RUL) ----------------
+if (M / "aging_summary.csv").exists():
+    sm = pd.read_csv(M / "aging_summary.csv"); PROV = {"EXPERIMENTAL_DERIVED": "NASA-style", "SIMULATED": "PyBaMM (sim.)"}
+    FS = {"cycle_only": "cycle only", "base": "base", "no_cycle": "no cycle", "ext_rct_re": "+Rct,Re", "cap_hist": "capacity history", "full": "history+signals"}
+    for tgt, name, unit in (("soh", "tab_aging_soh", "SOH points"), ("rul", "tab_aging_rul", "records")):
+        q = sm[(sm.protocol == "leave_one_battery_out") & (sm.target == tgt)].copy()
+        q["Data"] = q.provenance.map(PROV); q["Features"] = q.feature_set.map(FS); q["Model"] = q.model.map(lambda x: esc(x))
+        q = q.sort_values(["Data", "MAE"]).set_index(["Data", "Features", "Model"])[["n_batteries", "MAE", "RMSE", "R2", "MaxAE"]]
+        q.columns = ["Batt.", "MAE", "RMSE", "R$^2$", "MaxAE"]
+        write(name, q, "%.2f", f"{tgt.upper()} leave-one-battery-out, pooled over held-out batteries ({unit}). ``PyBaMM (sim.)'' rows are \\emph{{simulated}} data.", f"tab:{name}")
+    x = sm[(sm.dataset == "NASA_FEATURES") & (sm.protocol != "leave_one_battery_out")].copy()
+    x["Protocol"] = x.protocol.map(lambda s: esc(s)); x["Target"] = x.target.str.upper(); x["Model"] = x.model.map(lambda s: esc(s)); x["Features"] = x.feature_set.map(FS)
+    x = x.sort_values(["Target", "Protocol", "Model"]).set_index(["Target", "Protocol", "Features", "Model"])[["n_batteries", "MAE", "RMSE", "R2"]]
+    x.columns = ["Batt.", "MAE", "RMSE", "R$^2$"]
+    write("tab_aging_transfer", x, "%.2f", "NASA-style data: temperature transfer (24\\,°C$\\leftrightarrow$4\\,°C) and augmentation ablation.", "tab:agingtransfer")
+    au = pd.read_csv(M / "aging_battery_audit.csv"); au = au[au.dataset == "NASA_FEATURES"][["battery_id", "n_cycles", "q0", "max_over_first", "ambient_c", "usable"]]
+    au.columns = ["Battery", "Cycles", "Q$_1$ (Ah)", "max/first", "Ambient (°C)", "Usable"]
+    write("tab_aging_audit", au.set_index("Battery"), "%.2f", "Rule-based audit of the NASA-style batteries (exclusion: fewer than 15 cycles, or capacity above 115\\,\\% of the first cycle).", "tab:agingaudit")
+    for f in (R / "results" / "figures").glob("*.png"):
+        shutil.copy(f, R / "report" / "figures" / f.name)

@@ -14,6 +14,18 @@ Research software that estimates battery states from CALCE experimental data: **
 
 EKF recovers from a wrong initial SOC (70 % vs 100 %), CC does not; tree models extrapolate poorly to a 10× higher current; the NumPy LSTM/GRU are less accurate and noise-sensitive. Caveats (reference normalisation, in-sample EKF identification, no dynamic loads) are in `docs/LIMITATIONS.md`. Full tables: [`docs/EXPERIMENTAL_RESULTS.md`](docs/EXPERIMENTAL_RESULTS.md); report: `report/`.
 
+## SOH and RUL on ageing datasets (Kaggle CSV files, separate from CALCE)
+CALCE cannot support SOH/RUL, so three downloaded CSV files are used in `data/raw/KAGGLE/` and **their provenance is kept separate everywhere**:
+
+| File | Nature | Use |
+|---|---|---|
+| `features_arrhenius_tempmean.csv` | NASA-style battery IDs, features from an unknown third party (**provenance unverified**) | main SOH/RUL experiments (7 usable batteries) |
+| `augmented_full_dataset.csv` | same rows + 3 **artificial** replicas per battery | only as extra *training* rows of training batteries (ablation) |
+| `pybamm_synthetic_features.csv` | **PyBaMM simulation** (6 virtual batteries) | pipeline check only; never evidence for real batteries |
+
+Protocol: leave-one-battery-out, plus 24 °C↔4 °C transfer. Leaking columns (`RUL`, `NRUL`, `battery_life`, `capacity_norm/diff/ma5`) and the redundant `arrhenius_fade_rate` are never used as inputs; SOH is relative to the cell's first-cycle capacity (no nominal capacity exists); EOL = 70 % of the first-cycle capacity (the rule the files' own RUL labels follow); RUL is in "retained records". Two batteries are excluded by audit rules (`B0033`: 1 cycle, `B0040`: corrupted capacity).
+Highlights (pooled over held-out NASA-style batteries): SOH MAE 3.4 pts with Random Forest on signal features; RUL MAE 17.1 records (linear on capacity history) vs 46.4 for a mean-life baseline; **no temperature transfer and no augmentation gain demonstrated**; the Random Forest cannot extrapolate beyond the longest training life. Details: [`docs/AGING_EXPERIMENTS.md`](docs/AGING_EXPERIMENTS.md), report section "SOH and RUL on ageing datasets".
+
 ## Install (Windows 11 / Linux / macOS)
 ```powershell
 python -m venv .venv
@@ -31,6 +43,8 @@ python scripts/run_soc_experiments.py            # Module 1 (~5 min on 1 CPU cor
 python scripts/run_fault_experiments.py          # Module 3
 python scripts/run_soh_rul_feasibility.py        # Modules 2 & 4 feasibility verdicts
 python scripts/make_figures.py
+python scripts/run_aging_experiments.py        # SOH/RUL on data\raw\KAGGLE (~7 min)
+python scripts/summarize_aging.py              # pooled metrics, figures, docs/AGING_EXPERIMENTS.md
 python scripts/generate_results_doc.py
 python scripts/make_latex_tables.py              # then: cd report && latexmk -pdf main.tex
 streamlit run dashboard/app.py                   # dashboard (7 pages)

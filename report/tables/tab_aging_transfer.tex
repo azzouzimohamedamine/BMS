@@ -1,0 +1,38 @@
+\begin{table}[htbp]\centering\footnotesize
+\begin{tabular}{llllrrrr}
+\toprule
+ &  &  &  & Batt. & MAE & RMSE & R$^2$ \\
+Target & Protocol & Features & Model &  &  &  &  \\
+\midrule
+\multirow[t]{10}{*}{RUL} & \multirow[t]{4}{*}{cross\_temperature\_24to4} & capacity history & linear & 5 & 12.21 & 14.71 & -0.42 \\
+\cline{3-8}
+ &  & history+signals & linear & 5 & 26.29 & 30.14 & -4.98 \\
+\cline{3-8}
+ &  & capacity history & random\_forest & 5 & 19.48 & 21.81 & -2.13 \\
+\cline{3-8}
+ &  & history+signals & random\_forest & 5 & 12.17 & 13.72 & -0.24 \\
+\cline{2-8} \cline{3-8}
+ & \multirow[t]{4}{*}{cross\_temperature\_4to24} & capacity history & linear & 2 & 40.79 & 49.65 & -0.37 \\
+\cline{3-8}
+ &  & history+signals & linear & 2 & 44.16 & 54.51 & -0.65 \\
+\cline{3-8}
+ &  & capacity history & random\_forest & 2 & 43.99 & 56.19 & -0.75 \\
+\cline{3-8}
+ &  & history+signals & random\_forest & 2 & 38.03 & 48.84 & -0.32 \\
+\cline{2-8} \cline{3-8}
+ & \multirow[t]{2}{*}{lobo\_with\_augmented\_training\_rows} & \multirow[t]{2}{*}{history+signals} & linear & 7 & 34.59 & 42.11 & -0.01 \\
+ &  &  & random\_forest & 7 & 22.26 & 31.70 & 0.43 \\
+\cline{1-8} \cline{2-8} \cline{3-8}
+\multirow[t]{6}{*}{SOH} & \multirow[t]{2}{*}{cross\_temperature\_24to4} & \multirow[t]{2}{*}{base} & linear & 5 & 3.79 & 4.99 & 0.47 \\
+ &  &  & random\_forest & 5 & 5.50 & 6.73 & 0.03 \\
+\cline{2-8} \cline{3-8}
+ & \multirow[t]{2}{*}{cross\_temperature\_4to24} & \multirow[t]{2}{*}{base} & linear & 2 & 6.16 & 7.17 & 0.47 \\
+ &  &  & random\_forest & 2 & 8.21 & 9.45 & 0.07 \\
+\cline{2-8} \cline{3-8}
+ & \multirow[t]{2}{*}{lobo\_with\_augmented\_training\_rows} & \multirow[t]{2}{*}{base} & linear & 7 & 6.14 & 7.46 & 0.34 \\
+ &  &  & random\_forest & 7 & 3.17 & 3.89 & 0.82 \\
+\cline{1-8} \cline{2-8} \cline{3-8}
+\bottomrule
+\end{tabular}
+\caption{NASA-style data: temperature transfer (24\,°C$\leftrightarrow$4\,°C) and augmentation ablation.}\label{tab:agingtransfer}
+\end{table}

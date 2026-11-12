@@ -30,10 +30,11 @@ class _St(_Dummy):
     def select_slider(self, label, options, value=None, **k): return value
     def multiselect(self, label, options, default=None, **k): return default or []
     def dataframe(self, *a, **k): return None
+    def tabs(self, labels): return [_Dummy() for _ in labels]
 
 
 def test_all_pages_execute_with_stub_streamlit():
-    if not (ROOT / "results" / "metrics" / "soc_results.csv").exists():
+    if not (ROOT / "results" / "metrics" / "soc_results.csv").exists() or not (ROOT / "results" / "metrics" / "aging_summary.csv").exists():
         return
     st = _St(); st.sidebar = st
     mod = types.ModuleType("streamlit"); mod.__getattr__ = lambda n: getattr(st, n)

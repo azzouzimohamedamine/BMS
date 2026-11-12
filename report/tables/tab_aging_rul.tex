@@ -1,0 +1,31 @@
+\begin{table}[htbp]\centering\footnotesize
+\begin{tabular}{lllrrrrr}
+\toprule
+ &  &  & Batt. & MAE & RMSE & R$^2$ & MaxAE \\
+Data & Features & Model &  &  &  &  &  \\
+\midrule
+\multirow[t]{6}{*}{NASA-style} & \multirow[t]{2}{*}{capacity history} & linear & 7 & 17.14 & 23.74 & 0.68 & 76.31 \\
+ &  & random\_forest & 7 & 19.90 & 26.79 & 0.59 & 62.37 \\
+\cline{2-8}
+ & history+signals & random\_forest & 7 & 20.08 & 29.29 & 0.51 & 73.88 \\
+\cline{2-8}
+ & capacity history & baseline\_linear\_extrap & 7 & 26.20 & 37.38 & 0.20 & 156.00 \\
+\cline{2-8}
+ & history+signals & linear & 7 & 34.56 & 42.07 & -0.01 & 66.09 \\
+\cline{2-8}
+ & capacity history & baseline\_mean\_life & 7 & 46.35 & 57.50 & -0.88 & 116.17 \\
+\cline{1-8} \cline{2-8}
+\multirow[t]{6}{*}{PyBaMM (sim.)} & \multirow[t]{2}{*}{capacity history} & random\_forest & 6 & 7.22 & 10.50 & 0.96 & 46.21 \\
+ &  & linear & 6 & 9.11 & 12.72 & 0.95 & 41.17 \\
+\cline{2-8}
+ & history+signals & random\_forest & 6 & 15.22 & 19.62 & 0.87 & 52.37 \\
+\cline{2-8}
+ & \multirow[t]{2}{*}{capacity history} & baseline\_linear\_extrap & 6 & 16.13 & 19.82 & 0.87 & 65.77 \\
+ &  & baseline\_mean\_life & 6 & 18.40 & 22.74 & 0.83 & 42.00 \\
+\cline{2-8}
+ & history+signals & linear & 6 & 43.92 & 50.04 & 0.17 & 106.48 \\
+\cline{1-8} \cline{2-8}
+\bottomrule
+\end{tabular}
+\caption{RUL leave-one-battery-out, pooled over held-out batteries (records). ``PyBaMM (sim.)'' rows are \emph{simulated} data.}\label{tab:tab_aging_rul}
+\end{table}

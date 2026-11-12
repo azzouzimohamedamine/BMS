@@ -23,7 +23,7 @@ def _norm(name: str) -> str:
     return re.sub(r"[\s_\-]+", "_", stem)
 
 
-def find_raw_file(filename: str, raw_dir: Path) -> Path | None:
+def find_raw_file(filename: str, raw_dir: Path, exts: tuple[str, ...] = (".xls", ".xlsx")) -> Path | None:
     """Exact path first; otherwise the SAME file renamed by the OS/browser (case, '(1)' suffix, .xls/.xlsx
     swap, sub-folder). A different dataset is never substituted: normalised names must be equal."""
     exact = raw_dir / filename
@@ -32,7 +32,7 @@ def find_raw_file(filename: str, raw_dir: Path) -> Path | None:
     if raw_dir.exists():
         target = _norm(filename)
         for p in sorted(raw_dir.rglob("*")):
-            if p.is_file() and p.suffix.lower() in (".xls", ".xlsx") and not p.name.startswith("~$") and _norm(p.name) == target:
+            if p.is_file() and p.suffix.lower() in exts and not p.name.startswith("~$") and _norm(p.name) == target:
                 log.warning("Expected '%s' but using the identically named file '%s'. Consider renaming it.", filename, p)
                 return p
     return None

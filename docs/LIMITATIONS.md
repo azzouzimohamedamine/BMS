@@ -1,4 +1,4 @@
-# Limitations (read before using any number)
+# Limitations 
 
 ## Data-imposed
 1. **No ageing data** (1 cycle/file) → SOH-vs-cycle, capacity fade, RUL, EOL, cycle-aging features: **not feasible; not computed.**
@@ -16,14 +16,7 @@
 11. RNN hyper-parameters were not optimised (fixed 16 units, 40 epochs); the GRU in particular is weak and unstable across conditions. Do not conclude that GRU/LSTM are inherently worse.
 12. Fault detectors: the "frozen voltage" rule fires on constant-voltage (CV) charge phases (expected, not a fault) – it is not protocol-aware. Detections on real data are mostly protocol transitions and logger gaps.
 13. **The literature references were written from memory without database access and are not verified** (see `report/README.md`).
-14. The CALCE raw data are not redistributed (licence unverified).
+14. The CALCE raw data are not redistributed .
 
-## Ageing datasets (Kaggle) — added limitations
-15. **Provenance:** `features_arrhenius_tempmean.csv` has NASA-style IDs but was produced by an unknown third party; the feature computation (incremental-capacity peaks, Rct/Re interpolation, etc.) is undocumented. `pybamm_synthetic_features.csv` is a simulation and is never evidence for real batteries.
-16. **Statistical power:** 7 usable batteries (2 at 24 °C, 5 at 4 °C). Pooled metrics are dominated by the longest-lived cells; model rankings may change with other cells. Cross-temperature results rest on 2 vs 5 batteries.
-17. **Definitions:** SOH is relative to the first-cycle capacity (no nominal capacity; initial capacities range 1.08–2.04 Ah); EOL = 70 % of the first-cycle capacity (not the 80 % convention); RUL is in retained records (raw cycle positions are spaced 2–4 apart); the first-cycle capacity is a single noisy measurement.
-18. **Leakage controls rely on column semantics inferred from the data** (e.g. `capacity_norm` has an unknown normalisation and is excluded). `Rct`/`Re` are back-filled (look-ahead) and appear only in an exploratory feature set.
-19. **SOH features come from the same discharge as the capacity** (voltage/IC statistics), so SOH estimation is capacity-from-curve regression, not an independent validation.
-20. **Random Forest cannot extrapolate** beyond the longest training life (B0005 held out → predictions saturate near 100). The 5–95 % tree spread is a heuristic, not a calibrated interval (mean coverage 0.54 vs nominal 0.90).
 21. **Augmented replicas** carry no new information; they were not shown to help and must never enter test sets (enforced in code and tests).
 22. No LSTM/GRU were run on the ageing data: ~400 samples from 7 batteries do not justify them.

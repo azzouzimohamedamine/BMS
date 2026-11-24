@@ -1,6 +1,6 @@
 # Methodology
 
-All numbers quoted here come from `results/metrics/*.csv` produced by the scripts in `scripts/`.
+
 
 ## 1. Data and reference definitions
 * Four CALCE SP20-1 files → standard schema (`configs/dataset_config.yaml`): time [s], voltage [V], current [A] (charge > 0).
